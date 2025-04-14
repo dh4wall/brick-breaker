@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brick Breaker - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <h1 class="home-title">Brick Breaker</h1>
+        <div class="home-buttons">
+            <a href="{{ url_for('play') }}" class="home-button">Play Game</a>
+            {% if logged_in %}
+                <a href="{{ url_for('logout') }}" class="home-button">Logout</a>
+            {% else %}
+                <a href="{{ url_for('index') }}" class="home-button">Login</a>
+            {% endif %}
+        </div>
+        <div class="high-scores-table">
+            <h2>High Scores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in high_scores %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ score.name }}</td>
+                            <td>{{ score.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

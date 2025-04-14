@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brick Breaker - Play</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="sidebar">
+            <div class="high-scores">
+                <h2>Top 5 High Scores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for score in high_scores %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ score.name }}</td>
+                                <td>{{ score.score }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="lives">
+                <h2>Lives</h2>
+                <span id="livesDisplay">3</span>
+            </div>
+            <div class="controls">
+                <button id="playAgainButton" class="sidebar-button" style="display: none;">Play Again</button>
+                <button id="quitButton" class="sidebar-button" style="display: none;">Quit</button>
+            </div>
+        </div>
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <button id="startButton" class="game-button">Start Game</button>
+        </div>
+    </div>
+    <audio id="paddleHitSound" src="{{ url_for('static', filename='audio/paddle_hit.mp3') }}" preload="auto"></audio>
+    <audio id="brickBreakSound" src="{{ url_for('static', filename='audio/brick_break.mp3') }}" preload="auto"></audio>
+    <audio id="powerupSound" src="{{ url_for('static', filename='audio/powerup.mp3') }}" preload="auto"></audio>
+    <audio id="gameOverSound" src="{{ url_for('static', filename='audio/game_over.mp3') }}" preload="auto"></audio>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
